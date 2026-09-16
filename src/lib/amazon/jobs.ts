@@ -1,5 +1,5 @@
 export const AMAZON_FULFILLMENT_JOBS_URL =
-  "https://www.amazon.jobs/content/job-categories/fulfillment-center-warehouse-associate";
+  "https://www.amazon.jobs/content/en/job-categories/fulfillment-center-warehouse-associate";
 
 export const AMAZON_INDIANAPOLIS_JOBS_URL =
   "https://www.amazon.jobs/en/location/indianapolis";
@@ -14,7 +14,7 @@ export type AmazonJob = {
 
 export const amazonSource = {
   company: "Amazon",
-  name: "Amazon Fulfillment Center Warehouse Associate",
+  category: "Fulfillment Center Warehouse Associate",
   jobsUrl: AMAZON_FULFILLMENT_JOBS_URL,
   locationUrl: AMAZON_INDIANAPOLIS_JOBS_URL,
 };
