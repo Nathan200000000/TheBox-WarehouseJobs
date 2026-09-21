@@ -1,0 +1,33 @@
+"use client";
+
+import { useState } from "react";
+
+export default function ThemeToggle() {
+  const [dark, setDark] = useState(false);
+
+  const toggleTheme = () => {
+    const nextDark = !dark;
+
+    setDark(nextDark);
+
+    if (nextDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("thebox-theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("thebox-theme", "light");
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={`Switch to ${dark ? "light" : "dark"} mode`}
+      className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+    >
+      <span aria-hidden="true">{dark ? "☀️" : "🌙"}</span>
+      <span>{dark ? "Light" : "Dark"}</span>
+    </button>
+  );
+}
