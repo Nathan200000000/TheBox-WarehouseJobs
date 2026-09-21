@@ -18,3 +18,17 @@ export const amazonSource = {
   jobsUrl: AMAZON_FULFILLMENT_JOBS_URL,
   locationUrl: AMAZON_INDIANAPOLIS_JOBS_URL,
 };
+
+export function buildAmazonSearchUrl(
+  keyword = "warehouse",
+  location = "Indianapolis, IN",
+) {
+  const params = new URLSearchParams({
+    base_query: keyword,
+    loc_query: location,
+    country: "USA",
+    sort: "recent",
+  });
+
+  return `https://www.amazon.jobs/en/search?${params.toString()}`;
+}
