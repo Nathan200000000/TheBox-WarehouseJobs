@@ -70,7 +70,7 @@ export default function Home() {
     <main className="w-full min-w-0 bg-white text-slate-900 dark:bg-black dark:text-white">
       {/* Hero */}
       <section className="w-full border-b border-slate-200 bg-white dark:border-neutral-800 dark:bg-black">
-        <div className="mx-auto w-full max-w-7xl px-6 py-20 text-center md:py-28">
+        <div className="tb-hero mx-auto w-full max-w-7xl px-6 py-20 text-center md:py-28">
           <div className="mx-auto mb-6 inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-600 dark:text-emerald-400">
             Real jobs. Direct employers.
           </div>
@@ -119,7 +119,7 @@ export default function Home() {
 
               <button
                 type="submit"
-                className="rounded-xl bg-emerald-500 px-7 py-4 font-semibold text-slate-950 transition hover:bg-emerald-400"
+                className="rounded-xl bg-emerald-500 px-7 py-4 font-semibold text-slate-950 transition hover:bg-emerald-400 active:scale-95"
               >
                 Find Employers
               </button>
@@ -142,16 +142,17 @@ export default function Home() {
         className="w-full border-b border-slate-200 bg-slate-50 dark:border-neutral-800 dark:bg-neutral-950/40"
       >
         <div className="mx-auto w-full max-w-7xl px-6 py-16">
-          <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+          <p data-reveal className="text-sm font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
             Featured employers
           </p>
           <h2
+            data-reveal
             id="featured-heading"
             className="mt-2 text-3xl font-bold text-slate-900 dark:text-white"
           >
             Hiring for warehouse roles
           </h2>
-          <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
+          <p data-reveal className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
             A few verified employers to start with. Each one sends you
             straight to its own official hiring website.
           </p>
@@ -161,7 +162,8 @@ export default function Home() {
               <Link
                 key={employer.slug}
                 href={employer.pageUrl}
-                className="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-emerald-500/50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950"
+                data-reveal
+                className="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-950"
               >
                 <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                   ✓ Verified · {employer.industry}
@@ -173,7 +175,8 @@ export default function Home() {
                   {employer.roles.slice(0, 3).join(" · ")}
                 </span>
                 <span className="mt-5 text-sm font-semibold text-slate-900 group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-400">
-                  View {employer.name} jobs →
+                  View {employer.name} jobs{" "}
+                  <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </Link>
             ))}
@@ -187,7 +190,7 @@ export default function Home() {
         className="w-full bg-white dark:bg-black"
       >
         <div className="mx-auto w-full max-w-7xl px-6 py-20">
-          <div className="mb-10">
+          <div data-reveal className="mb-10">
             <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
               Current employers
             </p>
@@ -205,6 +208,7 @@ export default function Home() {
           </div>
 
           <div
+            data-reveal
             role="group"
             aria-label="Filter employers"
             className="mb-8 flex flex-wrap items-end gap-3"
@@ -257,7 +261,7 @@ export default function Home() {
           </div>
 
           {locationText !== "" && (
-            <div className="mb-8 rounded-2xl border border-blue-500/20 bg-blue-500/5 px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
+            <div className="tb-enter mb-8 rounded-2xl border border-blue-500/20 bg-blue-500/5 px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
               Every employer listed here hires across the U.S. Use the
               official hiring site on each employer page to see current
               openings near <strong>{locationText}</strong>.
@@ -265,7 +269,7 @@ export default function Home() {
           )}
 
           {filteredEmployers.length === 0 ? (
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center dark:border-neutral-800 dark:bg-neutral-950">
+            <div className="tb-enter rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center dark:border-neutral-800 dark:bg-neutral-950">
               <h4 className="text-xl font-semibold text-slate-900 dark:text-white">
                 No matching employers found
               </h4>
@@ -279,8 +283,9 @@ export default function Home() {
             <div className="grid min-w-0 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filteredEmployers.map((employer) => (
                 <article
+                  data-reveal
                   key={employer.slug}
-                  className="flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:border-emerald-500/40 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950"
+                  className="flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-950"
                 >
                   <div className="mb-4 flex flex-wrap gap-2">
                     <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
@@ -342,7 +347,7 @@ export default function Home() {
             </div>
           )}
 
-          <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-neutral-800 dark:bg-neutral-950/60">
+          <div data-reveal className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-neutral-800 dark:bg-neutral-950/60">
             <h4 className="font-semibold text-slate-900 dark:text-white">
               How TheBox handles employers
             </h4>
@@ -364,7 +369,7 @@ export default function Home() {
         className="w-full border-y border-slate-200 bg-slate-50 dark:border-neutral-800 dark:bg-neutral-950/40"
       >
         <div className="mx-auto grid w-full max-w-7xl gap-8 px-6 py-16 md:grid-cols-3">
-          <div>
+          <div data-reveal>
             <div className="mb-3 text-2xl">✓</div>
             <h4 className="font-semibold text-slate-900 dark:text-white">
               Official sources
@@ -375,7 +380,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div>
+          <div data-reveal>
             <div className="mb-3 text-2xl">→</div>
             <h4 className="font-semibold text-slate-900 dark:text-white">
               Direct applications
@@ -386,7 +391,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div>
+          <div data-reveal>
             <div className="mb-3 text-2xl">□</div>
             <h4 className="font-semibold text-slate-900 dark:text-white">
               No fake listings
@@ -405,16 +410,16 @@ export default function Home() {
         className="w-full bg-white dark:bg-black"
       >
         <div className="mx-auto w-full max-w-7xl px-6 py-20">
-          <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+          <p data-reveal className="text-sm font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
             How it works
           </p>
 
-          <h3 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">
+          <h3 data-reveal className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">
             A simpler path to legitimate warehouse jobs
           </h3>
 
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 dark:border-neutral-800 dark:bg-neutral-950">
+            <div data-reveal className="rounded-2xl border border-slate-200 bg-slate-50 p-7 transition hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950">
               <div className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
                 01
               </div>
@@ -429,7 +434,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 dark:border-neutral-800 dark:bg-neutral-950">
+            <div data-reveal className="rounded-2xl border border-slate-200 bg-slate-50 p-7 transition hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950">
               <div className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
                 02
               </div>
@@ -447,7 +452,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 dark:border-neutral-800 dark:bg-neutral-950">
+            <div data-reveal className="rounded-2xl border border-slate-200 bg-slate-50 p-7 transition hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950">
               <div className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
                 03
               </div>

@@ -53,7 +53,7 @@ export default function ReportForm() {
 
   if (sent) {
     return (
-      <div role="status" className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+      <div role="status" className="tb-pop rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5">
         <p className="font-semibold text-slate-900 dark:text-white">Your report opened on GitHub.</p>
         <p className="mt-1">
           Click <strong>Create</strong> on that page to send it. Didn&apos;t open?{" "}
@@ -109,7 +109,7 @@ export default function ReportForm() {
       </fieldset>
 
       {error && (
-        <p id="report-error" role="alert" className="text-sm font-medium text-red-600 dark:text-red-400">{error}</p>
+        <p id="report-error" role="alert" className="tb-enter text-sm font-medium text-red-600 dark:text-red-400">{error}</p>
       )}
 
       <p className="text-sm text-slate-500 dark:text-slate-400">
