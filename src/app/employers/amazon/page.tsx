@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function AmazonPage() {
   const jobsUrl =
@@ -97,6 +98,7 @@ export default function AmazonPage() {
                 Go to Amazon Jobs
               </a>
             </section>
+            <ReportLink slug="amazon" name="Amazon" />
           </div>
         </div>
       </section>

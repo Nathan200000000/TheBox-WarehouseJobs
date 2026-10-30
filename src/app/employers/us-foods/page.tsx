@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function UsFoodsPage() {
   const jobsUrl = "https://careers.usfoods.com/us/en/Warehouse";
@@ -18,6 +19,7 @@ export default function UsFoodsPage() {
             <div><p className="font-semibold text-slate-900 dark:text-white">Application link</p><p className="mt-1 text-slate-600 dark:text-slate-400">TheBox links directly to US Foods&apos; official hiring website.</p></div>
           </div></section>
           <section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-neutral-800 dark:bg-neutral-950"><h2 className="text-2xl font-bold text-slate-950 dark:text-white">Apply Directly</h2><p className="mt-3 max-w-2xl leading-7 text-slate-600 dark:text-slate-400">TheBox sends you directly to US Foods&apos; official hiring website. TheBox does not copy US Foods job listings.</p><a href={jobsUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-emerald-400">Go to US Foods Jobs</a></section>
+          <ReportLink slug="us-foods" name="US Foods" />
         </div>
       </div></section>
     </main>

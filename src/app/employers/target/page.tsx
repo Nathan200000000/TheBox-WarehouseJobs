@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function TargetPage() {
   const jobsUrl =
@@ -42,6 +43,7 @@ export default function TargetPage() {
                 Go to Target Jobs
               </a>
             </section>
+            <ReportLink slug="target" name="Target" />
           </div>
         </div>
       </section>

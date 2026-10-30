@@ -3,259 +3,68 @@
 import Link from "next/link";
 import { useState } from "react";
 
-type Employer = {
-  name: string;
-  category: string;
-  pageUrl: string;
-  jobsUrl: string;
-  destination: string;
-  keywords: string[];
-};
+import {
+  EMPLOYERS,
+  INDUSTRIES,
+  ROLES,
+  type Employer,
+} from "@/lib/employers";
 
-const EMPLOYERS: Employer[] = [
-  {
-    name: "Amazon",
-    category: "Fulfillment Center Warehouse Associate",
-    pageUrl: "/employers/amazon",
-    jobsUrl:
-      "https://hiring.amazon.com/app?cmpid=ATLTEU1795H10#/jobSearch?jobTitle=Amazon%20Fulfillment%20Center%20Warehouse%20Associate",
-    destination: "hiring.amazon.com",
-    keywords: [
-      "amazon",
-      "warehouse",
-      "fulfillment",
-      "fulfillment center",
-      "warehouse associate",
-    ],
-  },
-  {
-    name: "Walmart",
-    category: "Supply Chain & Transportation",
-    pageUrl: "/employers/walmart",
-    jobsUrl:
-      "https://careers.walmart.com/us/en/home/careers-areas/supply-chain-and-transportation",
-    destination: "careers.walmart.com",
-    keywords: [
-      "walmart",
-      "warehouse",
-      "supply chain",
-      "transportation",
-      "distribution",
-    ],
-  },
-  {
-    name: "UPS",
-    category: "Warehouse & Hourly Roles",
-    pageUrl: "/employers/ups",
-    jobsUrl: "https://www.jobs-ups.com/us/en/hourly-roles",
-    destination: "jobs-ups.com",
-    keywords: [
-      "ups",
-      "warehouse",
-      "package handler",
-      "hourly",
-      "distribution",
-    ],
-  },
-  {
-    name: "FedEx",
-    category: "Package Handler",
-    pageUrl: "/employers/fedex",
-    jobsUrl:
-      "https://careers.fedex.com/career-areas/package-handler/jobs",
-    destination: "careers.fedex.com",
-    keywords: [
-      "fedex",
-      "warehouse",
-      "package handler",
-      "package",
-      "distribution",
-    ],
-  },
-  {
-    name: "Home Depot",
-    category: "Warehouse Jobs",
-    pageUrl: "/employers/home-depot",
-    jobsUrl: "https://careers.homedepot.com/career-areas/warehouse-jobs/",
-    destination: "careers.homedepot.com",
-    keywords: [
-      "home depot",
-      "warehouse",
-      "distribution",
-      "supply chain",
-    ],
-  },
-  {
-    name: "Target",
-    category: "Supply Chain",
-    pageUrl: "/employers/target",
-    jobsUrl:
-      "https://corporate.target.com/careers/career-areas/supply-chain",
-    destination: "corporate.target.com",
-    keywords: [
-      "target",
-      "warehouse",
-      "supply chain",
-      "distribution",
-      "fulfillment",
-    ],
-  },
-  {
-    name: "Costco",
-    category: "Warehouse & Distribution",
-    pageUrl: "/employers/costco",
-    jobsUrl: "https://careers.costco.com/",
-    destination: "careers.costco.com",
-    keywords: ["costco", "warehouse", "distribution", "stocking"],
-  },
-  {
-    name: "DHL",
-    category: "Warehouse & Package Handling",
-    pageUrl: "/employers/dhl",
-    jobsUrl:
-      "https://careers.dhl.com/global/en/c/warehouse-and-package-handling-jobs",
-    destination: "careers.dhl.com",
-    keywords: [
-      "dhl",
-      "warehouse",
-      "package handling",
-      "logistics",
-      "distribution",
-    ],
-  },
-  {
-    name: "Ryder",
-    category: "Warehouse & Logistics",
-    pageUrl: "/employers/ryder",
-    jobsUrl: "https://www.ryder.com/en-us/careers",
-    destination: "ryder.com",
-    keywords: [
-      "ryder",
-      "warehouse",
-      "logistics",
-      "supply chain",
-      "distribution",
-    ],
-  },
-  {
-    name: "GXO",
-    category: "Warehouse & Logistics",
-    pageUrl: "/employers/gxo",
-    jobsUrl: "https://gxo.com/careers/",
-    destination: "gxo.com",
-    keywords: [
-      "gxo",
-      "warehouse",
-      "logistics",
-      "supply chain",
-      "distribution",
-    ],
-  },
-  {
-    name: "Sysco",
-    category: "Warehouse",
-    pageUrl: "/employers/sysco",
-    jobsUrl: "https://careers.sysco.com/en/warehouse",
-    destination: "careers.sysco.com",
-    keywords: [
-      "sysco",
-      "warehouse",
-      "food distribution",
-      "distribution",
-      "order selector",
-    ],
-  },
-  {
-    name: "Lineage",
-    category: "Cold Storage & Warehouse",
-    pageUrl: "/employers/lineage",
-    jobsUrl: "https://careers.onelineage.com/us/en",
-    destination: "careers.onelineage.com",
-    keywords: [
-      "lineage",
-      "warehouse",
-      "cold storage",
-      "logistics",
-      "distribution",
-    ],
-  },
-  {
-    name: "US Foods",
-    category: "Warehouse",
-    pageUrl: "/employers/us-foods",
-    jobsUrl: "https://careers.usfoods.com/us/en/Warehouse",
-    destination: "careers.usfoods.com",
-    keywords: [
-      "us foods",
-      "warehouse",
-      "food distribution",
-      "distribution",
-      "order selector",
-    ],
-  },
-  {
-    name: "Grainger",
-    category: "Warehouse & Distribution",
-    pageUrl: "/employers/grainger",
-    jobsUrl: "https://jobs.grainger.com/",
-    destination: "jobs.grainger.com",
-    keywords: [
-      "grainger",
-      "warehouse",
-      "distribution",
-      "supply chain",
-      "inventory",
-    ],
-  },
-  {
-    name: "Fastenal",
-    category: "Warehouse & Distribution",
-    pageUrl: "/employers/fastenal",
-    jobsUrl: "https://careers.fastenal.com/",
-    destination: "careers.fastenal.com",
-    keywords: [
-      "fastenal",
-      "warehouse",
-      "distribution",
-      "inventory",
-      "shipping",
-    ],
-  },
-];
+const selectClass =
+  "min-w-0 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-500 dark:border-slate-700 dark:bg-black dark:text-white";
+
+function matchesSearch(employer: Employer, searchText: string) {
+  if (searchText.length === 0) return true;
+  const terms = [
+    employer.name,
+    employer.category,
+    employer.industry,
+    ...employer.roles,
+    ...employer.keywords,
+  ].map((term) => term.toLowerCase());
+  return terms.some(
+    (term) => term.includes(searchText) || searchText.includes(term),
+  );
+}
 
 export default function Home() {
   const [jobSearch, setJobSearch] = useState("");
   const [locationSearch, setLocationSearch] = useState("");
   const [searched, setSearched] = useState(false);
+  const [industry, setIndustry] = useState("");
+  const [role, setRole] = useState("");
 
-  const handleSearch = () => {
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setSearched(true);
+    document
+      .getElementById("jobs")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const searchText = jobSearch.trim().toLowerCase();
-  const locationText = locationSearch.trim().toLowerCase();
+  const clearFilters = () => {
+    setJobSearch("");
+    setLocationSearch("");
+    setIndustry("");
+    setRole("");
+    setSearched(false);
+  };
 
-  const filteredEmployers = EMPLOYERS.filter((employer) => {
-    if (!searched) {
-      return true;
-    }
+  const searchText = searched ? jobSearch.trim().toLowerCase() : "";
+  const locationText = searched ? locationSearch.trim() : "";
 
-    const jobMatches =
-      searchText.length === 0 ||
-      employer.keywords.some(
-        (keyword) =>
-          keyword.includes(searchText) ||
-          searchText.includes(keyword),
-      );
+  // Every listed employer hires across the U.S., so location never hides
+  // an employer; openings near a location are on each official site.
+  const filteredEmployers = EMPLOYERS.filter(
+    (employer) =>
+      matchesSearch(employer, searchText) &&
+      (industry === "" || employer.industry === industry) &&
+      (role === "" || employer.roles.includes(role as Employer["roles"][number])),
+  );
 
-    const locationMatches =
-      locationText.length === 0 ||
-      locationText.includes("indianapolis") ||
-      locationText.includes("indiana") ||
-      locationText === "in";
-
-    return jobMatches && locationMatches;
-  });
+  const featuredEmployers = EMPLOYERS.filter((employer) => employer.featured);
+  const filtersActive =
+    searchText !== "" || locationText !== "" || industry !== "" || role !== "";
 
   return (
     <main className="w-full min-w-0 bg-white text-slate-900 dark:bg-black dark:text-white">
@@ -266,12 +75,12 @@ export default function Home() {
             Real jobs. Direct employers.
           </div>
 
-          <h2 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-white">
+          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-white">
             Real warehouse jobs.
             <span className="block text-emerald-600 dark:text-emerald-400">
               Direct from employers.
             </span>
-          </h2>
+          </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
             TheBox helps you find legitimate warehouse and logistics
@@ -280,14 +89,20 @@ export default function Home() {
 
           {/* Search */}
           <div className="mx-auto mt-10 w-full max-w-4xl rounded-2xl border border-slate-200 bg-white p-3 shadow-xl dark:border-slate-700 dark:bg-neutral-950">
-            <div className="grid min-w-0 gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
+            <form
+              onSubmit={handleSearch}
+              role="search"
+              aria-label="Search warehouse employers"
+              className="grid min-w-0 gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]"
+            >
               <input
                 type="text"
                 value={jobSearch}
                 onChange={(event) =>
                   setJobSearch(event.target.value)
                 }
-                placeholder="Job title or employer"
+                placeholder="Job title, role, or employer"
+                aria-label="Job title, role, or employer"
                 className="min-w-0 rounded-xl border border-slate-300 bg-white px-5 py-4 text-slate-900 outline-none placeholder:text-slate-500 focus:border-emerald-500 dark:border-slate-700 dark:bg-black dark:text-white"
               />
 
@@ -297,24 +112,71 @@ export default function Home() {
                 onChange={(event) =>
                   setLocationSearch(event.target.value)
                 }
-                placeholder="Location"
+                placeholder="City or state"
+                aria-label="Location"
                 className="min-w-0 rounded-xl border border-slate-300 bg-white px-5 py-4 text-slate-900 outline-none placeholder:text-slate-500 focus:border-emerald-500 dark:border-slate-700 dark:bg-black dark:text-white"
               />
 
               <button
-                type="button"
-                onClick={handleSearch}
+                type="submit"
                 className="rounded-xl bg-emerald-500 px-7 py-4 font-semibold text-slate-950 transition hover:bg-emerald-400"
               >
                 Find Employers
               </button>
-            </div>
+            </form>
           </div>
 
           <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm text-slate-600 dark:text-slate-400">
-            <span>✓ Official employer sources</span>
+            <Link href="/verification" className="transition hover:text-emerald-600 dark:hover:text-emerald-400">
+              ✓ Verified employer sources
+            </Link>
             <span>✓ Direct application links</span>
             <span>✓ No staffing agencies</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured */}
+      <section
+        aria-labelledby="featured-heading"
+        className="w-full border-b border-slate-200 bg-slate-50 dark:border-neutral-800 dark:bg-neutral-950/40"
+      >
+        <div className="mx-auto w-full max-w-7xl px-6 py-16">
+          <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+            Featured employers
+          </p>
+          <h2
+            id="featured-heading"
+            className="mt-2 text-3xl font-bold text-slate-900 dark:text-white"
+          >
+            Hiring for warehouse roles
+          </h2>
+          <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
+            A few verified employers to start with. Each one sends you
+            straight to its own official hiring website.
+          </p>
+
+          <div className="mt-8 grid min-w-0 gap-6 md:grid-cols-3">
+            {featuredEmployers.map((employer) => (
+              <Link
+                key={employer.slug}
+                href={employer.pageUrl}
+                className="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-emerald-500/50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950"
+              >
+                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                  ✓ Verified · {employer.industry}
+                </span>
+                <span className="mt-3 text-2xl font-bold text-slate-900 dark:text-white">
+                  {employer.name}
+                </span>
+                <span className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                  {employer.roles.slice(0, 3).join(" · ")}
+                </span>
+                <span className="mt-5 text-sm font-semibold text-slate-900 group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-400">
+                  View {employer.name} jobs →
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -342,22 +204,82 @@ export default function Home() {
             </p>
           </div>
 
-          {searched && filteredEmployers.length === 0 ? (
+          <div
+            role="group"
+            aria-label="Filter employers"
+            className="mb-8 flex flex-wrap items-end gap-3"
+          >
+            <label className="grid gap-1 text-sm text-slate-600 dark:text-slate-400">
+              Industry
+              <select
+                value={industry}
+                onChange={(event) => setIndustry(event.target.value)}
+                className={selectClass}
+              >
+                <option value="">All industries</option>
+                {INDUSTRIES.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="grid gap-1 text-sm text-slate-600 dark:text-slate-400">
+              Role
+              <select
+                value={role}
+                onChange={(event) => setRole(event.target.value)}
+                className={selectClass}
+              >
+                <option value="">All roles</option>
+                {ROLES.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            {filtersActive && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-neutral-900"
+              >
+                Clear search and filters
+              </button>
+            )}
+
+            <p className="ml-auto text-sm text-slate-500 dark:text-slate-400" aria-live="polite">
+              Showing {filteredEmployers.length} of {EMPLOYERS.length} employers
+            </p>
+          </div>
+
+          {locationText !== "" && (
+            <div className="mb-8 rounded-2xl border border-blue-500/20 bg-blue-500/5 px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
+              Every employer listed here hires across the U.S. Use the
+              official hiring site on each employer page to see current
+              openings near <strong>{locationText}</strong>.
+            </div>
+          )}
+
+          {filteredEmployers.length === 0 ? (
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center dark:border-neutral-800 dark:bg-neutral-950">
               <h4 className="text-xl font-semibold text-slate-900 dark:text-white">
                 No matching employers found
               </h4>
 
               <p className="mt-2 text-slate-600 dark:text-slate-400">
-                Try searching for warehouse, fulfillment, logistics,
-                distribution, or an employer name.
+                Try a role like forklift or package handler, an
+                industry like cold storage, or an employer name.
               </p>
             </div>
           ) : (
             <div className="grid min-w-0 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filteredEmployers.map((employer) => (
                 <article
-                  key={employer.name}
+                  key={employer.slug}
                   className="flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:border-emerald-500/40 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950"
                 >
                   <div className="mb-4 flex flex-wrap gap-2">
@@ -377,6 +299,25 @@ export default function Home() {
                   <p className="mt-2 font-medium text-slate-700 dark:text-slate-300">
                     {employer.category}
                   </p>
+
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    {employer.industry}
+                  </p>
+
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Typical roles">
+                    {employer.roles.map((item) => (
+                      <li
+                        key={item}
+                        className={`rounded-lg border px-2 py-1 text-xs ${
+                          role === item
+                            ? "border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                            : "border-slate-200 text-slate-600 dark:border-neutral-800 dark:text-slate-400"
+                        }`}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
 
                   <p className="mt-5 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
                     View the {employer.name} employer page on TheBox,
@@ -499,7 +440,10 @@ export default function Home() {
 
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                 See where the employer&apos;s official hiring site is
-                located before applying.
+                located before applying.{" "}
+                <Link href="/verification" className="font-medium text-emerald-600 hover:underline dark:text-emerald-400">
+                  How we verify
+                </Link>
               </p>
             </div>
 
@@ -525,6 +469,12 @@ export default function Home() {
       <footer className="w-full border-t border-slate-200 bg-white dark:border-neutral-800 dark:bg-black">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-6 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:text-slate-400">
           <p>© 2026 TheBox. Direct warehouse jobs.</p>
+
+          <nav aria-label="Footer" className="flex flex-wrap gap-4">
+            <Link href="/verification" className="hover:text-slate-900 dark:hover:text-white">Verification</Link>
+            <Link href="/for-employers" className="hover:text-slate-900 dark:hover:text-white">For Employers</Link>
+            <Link href="/report" className="hover:text-slate-900 dark:hover:text-white">Report a Scam</Link>
+          </nav>
 
           <p>
             TheBox is not a staffing agency and does not guarantee

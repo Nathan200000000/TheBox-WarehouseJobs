@@ -1,9 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);
+
+  // Pick up the theme the visitor chose last time (applied in layout.tsx).
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   const toggleTheme = () => {
     const nextDark = !dark;

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function UpsPage() {
   const jobsUrl = "https://www.jobs-ups.com/us/en/hourly-roles";
@@ -95,6 +96,7 @@ export default function UpsPage() {
                 Go to UPS Jobs
               </a>
             </section>
+            <ReportLink slug="ups" name="UPS" />
           </div>
         </div>
       </section>

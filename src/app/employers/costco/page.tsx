@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function CostcoPage() {
   const jobsUrl = "https://careers.costco.com/";
@@ -30,6 +31,7 @@ export default function CostcoPage() {
               <p className="mt-3 max-w-2xl leading-7 text-slate-600 dark:text-slate-400">TheBox sends you directly to Costco&apos;s official hiring website. TheBox does not copy Costco job listings.</p>
               <a href={jobsUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-emerald-400">Go to Costco Jobs</a>
             </section>
+            <ReportLink slug="costco" name="Costco" />
           </div>
         </div>
       </section>

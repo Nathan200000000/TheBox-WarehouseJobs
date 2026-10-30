@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function WalmartPage() {
   const jobsUrl =
@@ -96,6 +97,7 @@ export default function WalmartPage() {
                 Go to Walmart Jobs
               </a>
             </section>
+            <ReportLink slug="walmart" name="Walmart" />
           </div>
         </div>
       </section>

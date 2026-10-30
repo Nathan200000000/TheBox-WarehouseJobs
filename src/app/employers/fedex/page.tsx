@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function FedExPage() {
   const jobsUrl =
@@ -96,6 +97,7 @@ export default function FedExPage() {
                 Go to FedEx Jobs
               </a>
             </section>
+            <ReportLink slug="fedex" name="FedEx" />
           </div>
         </div>
       </section>

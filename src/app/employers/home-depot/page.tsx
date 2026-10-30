@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
 
 export default function HomeDepotPage() {
   const jobsUrl =
@@ -97,6 +98,7 @@ export default function HomeDepotPage() {
                 Go to Home Depot Jobs
               </a>
             </section>
+            <ReportLink slug="home-depot" name="Home Depot" />
           </div>
         </div>
       </section>
