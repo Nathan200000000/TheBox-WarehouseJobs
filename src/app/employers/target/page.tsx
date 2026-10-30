@@ -1,4 +1,6 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
+import SaveEmployerButton from "@/components/SaveEmployerButton";
 
 export default function TargetPage() {
   const jobsUrl =
@@ -21,6 +23,7 @@ export default function TargetPage() {
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-950 md:text-5xl dark:text-white">Target</h1>
           <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">Supply Chain Jobs</p>
+          <div className="mt-5"><SaveEmployerButton slug="target" name="Target" /></div>
 
           <div className="mt-10 grid gap-6">
             <section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">
@@ -42,6 +45,7 @@ export default function TargetPage() {
                 Go to Target Jobs
               </a>
             </section>
+            <ReportLink slug="target" name="Target" />
           </div>
         </div>
       </section>

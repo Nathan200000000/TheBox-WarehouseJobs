@@ -1,4 +1,6 @@
 import Link from "next/link";
+import ReportLink from "@/components/ReportLink";
+import SaveEmployerButton from "@/components/SaveEmployerButton";
 
 export default function AmazonPage() {
   const jobsUrl =
@@ -30,6 +32,7 @@ export default function AmazonPage() {
           <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">
             Fulfillment Center Warehouse Associate
           </p>
+          <div className="mt-5"><SaveEmployerButton slug="amazon" name="Amazon" /></div>
 
           <div className="mt-10 grid gap-6">
             <section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">
@@ -97,6 +100,7 @@ export default function AmazonPage() {
                 Go to Amazon Jobs
               </a>
             </section>
+            <ReportLink slug="amazon" name="Amazon" />
           </div>
         </div>
       </section>
