@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import SaveEmployerButton from "@/components/SaveEmployerButton";
 import {
   EMPLOYERS,
   INDUSTRIES,
@@ -287,13 +288,17 @@ export default function Home() {
                   key={employer.slug}
                   className="flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-950"
                 >
-                  <div className="mb-4 flex flex-wrap gap-2">
+                  <div className="mb-4 flex flex-wrap items-center gap-2">
                     <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                       Official employer
                     </span>
 
                     <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-600 dark:text-blue-400">
                       Direct application
+                    </span>
+
+                    <span className="ml-auto">
+                      <SaveEmployerButton slug={employer.slug} name={employer.name} />
                     </span>
                   </div>
 
@@ -479,6 +484,7 @@ export default function Home() {
             <Link href="/verification" className="hover:text-slate-900 dark:hover:text-white">Verification</Link>
             <Link href="/for-employers" className="hover:text-slate-900 dark:hover:text-white">For Employers</Link>
             <Link href="/report" className="hover:text-slate-900 dark:hover:text-white">Report a Scam</Link>
+            <Link href="/privacy" className="hover:text-slate-900 dark:hover:text-white">Privacy</Link>
           </nav>
 
           <p>

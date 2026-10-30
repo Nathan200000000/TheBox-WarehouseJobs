@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ReportLink from "@/components/ReportLink";
+import SaveEmployerButton from "@/components/SaveEmployerButton";
 
 export default function FedExPage() {
   const jobsUrl =
@@ -31,6 +32,7 @@ export default function FedExPage() {
           <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">
             Package Handler Jobs
           </p>
+          <div className="mt-5"><SaveEmployerButton slug="fedex" name="FedEx" /></div>
 
           <div className="mt-10 grid gap-6">
             <section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">

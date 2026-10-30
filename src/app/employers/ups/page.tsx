@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ReportLink from "@/components/ReportLink";
+import SaveEmployerButton from "@/components/SaveEmployerButton";
 
 export default function UpsPage() {
   const jobsUrl = "https://www.jobs-ups.com/us/en/hourly-roles";
@@ -30,6 +31,7 @@ export default function UpsPage() {
           <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">
             Warehouse &amp; Hourly Roles
           </p>
+          <div className="mt-5"><SaveEmployerButton slug="ups" name="UPS" /></div>
 
           <div className="mt-10 grid gap-6">
             <section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">

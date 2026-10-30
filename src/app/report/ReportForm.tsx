@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { EMPLOYERS, newIssueUrl } from "@/lib/employers";
 import { RED_FLAGS } from "@/components/RedFlags";
@@ -13,7 +15,10 @@ export default function ReportForm() {
   const [details, setDetails] = useState("");
   const [flags, setFlags] = useState<string[]>([]);
   const [error, setError] = useState("");
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState<"" | "private" | "github">("");
+  const [sending, setSending] = useState(false);
+  const { data: session, status } = useSession();
+  const signedIn = status === "authenticated";
 
   // Pre-select the employer when arriving from an employer page (?employer=slug).
   useEffect(() => {
@@ -29,13 +34,38 @@ export default function ReportForm() {
       current.includes(flag) ? current.filter((f) => f !== flag) : [...current, flag],
     );
 
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (details.trim().length < 10) {
       setError("Describe what happened in at least a sentence so we can look into it.");
       return;
     }
     setError("");
+
+    // Signed in: send privately to TheBox.
+    if (signedIn) {
+      setSending(true);
+      try {
+        const res = await fetch("/api/reports", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ employer, link, details, flags }),
+        });
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        if (!res.ok) {
+          setError(data.error ?? "Your report couldn't be sent. Please try again.");
+          return;
+        }
+        setSent("private");
+      } catch {
+        setError("Your report couldn't be sent. Check your connection and try again.");
+      } finally {
+        setSending(false);
+      }
+      return;
+    }
+
+    // Signed out: file it as a public GitHub issue.
     const name = EMPLOYERS.find((e) => e.slug === employer)?.name ?? "Not listed / other";
     const body = [
       `**Employer:** ${name}`,
@@ -48,16 +78,37 @@ export default function ReportForm() {
       flags.length ? flags.map((f) => `- ${f}`).join("\n") : "- None selected",
     ].join("\n");
     window.open(newIssueUrl(`[Scam report] ${name}`, body), "_blank", "noopener,noreferrer");
-    setSent(true);
+    setSent("github");
   };
 
-  if (sent) {
+  const resetForm = () => {
+    setDetails("");
+    setLink("");
+    setFlags([]);
+    setSent("");
+  };
+
+  if (sent === "private") {
+    return (
+      <div role="status" className="tb-pop rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+        <p className="font-semibold text-slate-900 dark:text-white">Thank you. Your report was sent privately to TheBox.</p>
+        <p className="mt-1">
+          We review every report and may contact you at {session?.user?.email} if we need more details.{" "}
+          <button type="button" onClick={resetForm} className="font-semibold text-emerald-700 underline dark:text-emerald-400">
+            Send another report
+          </button>
+        </p>
+      </div>
+    );
+  }
+
+  if (sent === "github") {
     return (
       <div role="status" className="tb-pop rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5">
         <p className="font-semibold text-slate-900 dark:text-white">Your report opened on GitHub.</p>
         <p className="mt-1">
           Click <strong>Create</strong> on that page to send it. Didn&apos;t open?{" "}
-          <button type="button" onClick={() => setSent(false)} className="font-semibold text-emerald-700 underline dark:text-emerald-400">
+          <button type="button" onClick={() => setSent("")} className="font-semibold text-emerald-700 underline dark:text-emerald-400">
             Go back and try again
           </button>
           .
@@ -68,6 +119,24 @@ export default function ReportForm() {
 
   return (
     <form onSubmit={submit} className="grid gap-5" noValidate>
+      {status !== "loading" && (
+        signedIn ? (
+          <p className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm">
+            Signed in as <strong>{session?.user?.email}</strong>. Your report goes privately to TheBox.
+          </p>
+        ) : (
+          <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 px-4 py-3 text-sm">
+            <Link
+              href={`/signin?callbackUrl=${encodeURIComponent(`/report${employer ? `?employer=${employer}` : ""}`)}`}
+              className="font-semibold text-emerald-700 underline dark:text-emerald-400"
+            >
+              Sign in with Google
+            </Link>{" "}
+            to send your report privately. Or fill in the form below to file it publicly on GitHub.
+          </div>
+        )
+      )}
+
       <label className="grid gap-2">
         <span className="font-semibold text-slate-900 dark:text-white">Employer</span>
         <select value={employer} onChange={(e) => setEmployer(e.target.value)} className={fieldClass}>
@@ -112,14 +181,20 @@ export default function ReportForm() {
         <p id="report-error" role="alert" className="tb-enter text-sm font-medium text-red-600 dark:text-red-400">{error}</p>
       )}
 
-      <p className="text-sm text-slate-500 dark:text-slate-400">
-        Reports are filed as public issues on TheBox&apos;s GitHub page, so please don&apos;t
-        include your own personal details. A free GitHub account is needed to submit.
-      </p>
+      {!signedIn && (
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Without signing in, reports are filed as public issues on TheBox&apos;s GitHub page, so please
+          don&apos;t include your own personal details. A free GitHub account is needed to submit.
+        </p>
+      )}
 
       <div>
-        <button type="submit" className="rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-emerald-400">
-          Submit report
+        <button
+          type="submit"
+          disabled={sending}
+          className="rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-emerald-400 active:scale-95 disabled:opacity-60"
+        >
+          {sending ? "Sending…" : signedIn ? "Send report privately" : "File report on GitHub"}
         </button>
       </div>
     </form>

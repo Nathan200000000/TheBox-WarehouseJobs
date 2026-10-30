@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ReportLink from "@/components/ReportLink";
+import SaveEmployerButton from "@/components/SaveEmployerButton";
 
 export default function CostcoPage() {
   const jobsUrl = "https://careers.costco.com/";
@@ -16,6 +17,7 @@ export default function CostcoPage() {
           <div className="mb-5 inline-flex rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-700 dark:text-emerald-400">Official Employer</div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-950 md:text-5xl dark:text-white">Costco</h1>
           <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">Warehouse Jobs</p>
+          <div className="mt-5"><SaveEmployerButton slug="costco" name="Costco" /></div>
           <div className="mt-10 grid gap-6">
             <section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">
               <h2 className="text-2xl font-bold text-slate-950 dark:text-white">Source Verification</h2>

@@ -18,6 +18,8 @@ export default function ScrollReveal() {
 
     const root = document.documentElement;
     root.classList.add("tb-reveal-ready");
+    // Elements this run is watching (kept per run so a re-run starts clean).
+    const watched = new WeakSet<Element>();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,8 +43,9 @@ export default function ScrollReveal() {
         }
       });
 
-      document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-reveal-seen])").forEach((el) => {
-        el.setAttribute("data-reveal-seen", "");
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)").forEach((el) => {
+        if (watched.has(el)) return;
+        watched.add(el);
         // Stagger siblings that appear together (e.g. a row of cards).
         const siblings = el.parentElement
           ? Array.from(el.parentElement.children).filter((c) => c.hasAttribute("data-reveal"))
