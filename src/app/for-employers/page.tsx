@@ -34,7 +34,6 @@ export default function ForEmployersPage() {
 
   return (
     <PageShell
-      badge="For Employers"
       title="Reach warehouse workers directly"
       intro="TheBox sends job seekers straight to your official hiring website, with no middlemen. There's no fee to be listed, and we never take applications on your behalf."
     >

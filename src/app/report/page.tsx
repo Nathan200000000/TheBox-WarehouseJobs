@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default function ReportPage() {
   return (
     <PageShell
-      badge="Report a Scam"
       title="Report a suspicious listing"
       intro="Help keep TheBox trustworthy. Tell us about a link that doesn't go where it should, or anyone who contacted you pretending to hire for a warehouse employer."
     >

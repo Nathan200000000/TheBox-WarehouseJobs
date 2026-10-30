@@ -35,7 +35,6 @@ const CHECKS = [
 export default function VerificationPage() {
   return (
     <PageShell
-      badge="Verification"
       title="How TheBox verifies employers"
       intro="TheBox would rather show fewer trustworthy employers than thousands of questionable listings. Every employer passes these checks before it appears here."
     >

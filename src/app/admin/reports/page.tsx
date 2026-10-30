@@ -19,7 +19,7 @@ export default async function AdminReportsPage() {
 
   if (!isAdmin(email)) {
     return (
-      <PageShell badge="Admin" title="Scam reports" intro="This page is only for TheBox's team.">
+      <PageShell title="Scam reports" intro="This page is only for TheBox's team.">
         <Card title={email ? "No access" : "Sign in required"}>
           {email ? (
             <p>{email} doesn&apos;t have access to reports.</p>
@@ -37,7 +37,6 @@ export default async function AdminReportsPage() {
 
   return (
     <PageShell
-      badge="Admin"
       title="Scam reports"
       intro={`${reports.length} ${reports.length === 1 ? "report" : "reports"}, newest first. Reports are private; only TheBox admins can see this page.`}
     >

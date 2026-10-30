@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 export default function SignInPage() {
   return (
     <PageShell
-      badge="Account"
       title="Sign in to TheBox"
       intro="Use your Google account to save employers and send scam reports privately. TheBox only receives your name, email address and profile picture."
     >

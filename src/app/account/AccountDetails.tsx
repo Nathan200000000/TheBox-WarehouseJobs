@@ -41,7 +41,7 @@ export default function AccountDetails() {
           <p className="font-semibold text-slate-900 dark:text-white">No saved employers yet</p>
           <p className="mt-1 text-sm">
             Tap <strong>Save</strong> on any employer to keep it here.{" "}
-            <Link href="/#jobs" className="font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
+            <Link href="/jobs" className="font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
               Browse employers
             </Link>
           </p>

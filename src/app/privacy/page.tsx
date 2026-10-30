@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <PageShell
-      badge="Privacy"
       title="Privacy policy"
       intro="TheBox collects as little as possible. You can browse employers and apply without an account."
     >

@@ -7,7 +7,7 @@ export default function SyscoPage() {
 
   return (
     <main className="min-h-screen w-full bg-white text-slate-900 dark:bg-black dark:text-white">
-      <section className="w-full border-b border-slate-200 bg-white dark:border-neutral-800 dark:bg-black"><div className="mx-auto w-full max-w-5xl px-6 py-8"><Link href="/" className="inline-flex items-center text-sm font-medium text-slate-600 transition hover:text-slate-950 dark:text-slate-400 dark:hover:text-white">← Back to TheBox</Link></div></section>
+      <section className="w-full border-b border-slate-200 bg-white dark:border-neutral-800 dark:bg-black"><div className="mx-auto w-full max-w-5xl px-6 py-8"><Link href="/jobs" className="inline-flex items-center text-sm font-medium text-slate-600 transition hover:text-slate-950 dark:text-slate-400 dark:hover:text-white">← All employers</Link></div></section>
       <section className="w-full bg-slate-50 dark:bg-black"><div className="mx-auto w-full max-w-5xl px-6 py-16">
         <div className="mb-5 inline-flex rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-700 dark:text-emerald-400">Official Employer</div>
         <h1 className="text-4xl font-bold tracking-tight text-slate-950 md:text-5xl dark:text-white">Sysco</h1>
